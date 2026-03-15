@@ -63,18 +63,13 @@
         .card { background: var(--surface-gray); border: 1px solid var(--border-color); padding: 40px; transition: 0.4s; }
         .card i { font-size: 2.5rem; margin-bottom: 20px; color: var(--neon-orange); }
 
-        /* --- Privacy View Styling --- */
-        #privacy-view { display: none; padding: 60px 0; }
-        .policy-card { background: var(--surface-gray); border: 1px solid var(--border-color); padding: 40px; line-height: 1.8; color: var(--text-silver); }
-        .policy-card h2, .policy-card h3 { color: var(--neon-orange); text-transform: uppercase; }
-        .back-link { color: var(--neon-orange); text-decoration: none; font-weight: bold; display: inline-block; margin-bottom: 30px; cursor: pointer; }
-
         footer { margin-top: 100px; padding: 60px 0; border-top: 1px solid var(--border-color); text-align: center; }
-        .footer-nav a { color: var(--text-silver); text-decoration: none; margin: 0 15px; cursor: pointer; }
+        .footer-nav a { color: var(--text-silver); text-decoration: none; margin: 0 15px; cursor: pointer; transition: 0.3s; }
+        .footer-nav a:hover { color: var(--neon-orange); }
         .contact-email { color: var(--neon-orange); font-weight: bold; }
     </style>
 </head>
-<body onload="checkHash()">
+<body>
 
 <div class="container">
     <div id="main-view">
@@ -94,57 +89,16 @@
         </section>
     </div>
 
-    <div id="privacy-view">
-        <div class="back-link" onclick="toggleView('main')"><i class="fas fa-arrow-left"></i> Return to Site</div>
-        <div class="policy-card">
-            <h2>Privacy Policy</h2>
-            <p><strong>Last Updated: March 2026</strong></p>
-            <p>At Multilife Solutions, accessible from multilifesolutionsinvestments.org, one of our main priorities is the privacy of our visitors.</p>
-            <h3>1. Information We Collect</h3>
-            <p>Multilife Solutions is designed to provide sports updates with minimal data collection. We collect Device Information and Favorites to personalize your experience.</p>
-            <h3>2. Background Data Usage</h3>
-            <p>Our app uses background services for real-time alerts. No personal browsing or location data is tracked.</p>
-            <h3>3. How We Use Information</h3>
-            <p>To operate the app, improve experience, and send push notifications.</p>
-            <h3>4. Third-Party Services</h3>
-            <p>We use reliable sports data APIs that do not have access to your personal identity.</p>
-            <h3>Contact Us</h3>
-            <p>For data inquiries: <span class="contact-email">company@multilifesolutionsinvestments.org</span></p>
-        </div>
-    </div>
-
     <footer>
         <p>&copy; 2026 Multilife Solutions.</p>
+        <p>Support: <span class="contact-email">company@multilifesolutionsinvestments.org</span></p>
         <div class="footer-nav">
-            <a onclick="toggleView('privacy')">Privacy Policy</a>
+            <a href="privacypolicy.html">Privacy Policy</a>
+            <a href="#">Terms of Play</a>
+            <a href="#">Cookies</a>
         </div>
     </footer>
 </div>
-
-<script>
-    function toggleView(view) {
-        const main = document.getElementById('main-view');
-        const privacy = document.getElementById('privacy-view');
-        if (view === 'privacy') {
-            main.style.display = 'none';
-            privacy.style.display = 'block';
-            location.hash = "privacy";
-            window.scrollTo(0,0);
-        } else {
-            main.style.display = 'block';
-            privacy.style.display = 'none';
-            history.replaceState(null, null, ' ');
-            window.scrollTo(0,0);
-        }
-    }
-
-    // This function checks if the link has #privacy at the end
-    function checkHash() {
-        if (window.location.hash === "#privacy") {
-            toggleView('privacy');
-        }
-    }
-</script>
 
 </body>
 </html>
