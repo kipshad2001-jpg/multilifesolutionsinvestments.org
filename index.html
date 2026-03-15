@@ -22,6 +22,7 @@
             overflow-x: hidden;
         }
 
+        /* Animated background element */
         body::before {
             content: "";
             position: fixed;
@@ -39,8 +40,11 @@
             padding: 20px;
         }
 
-        header { text-align: center; padding: 100px 0 60px; }
-        
+        header {
+            text-align: center;
+            padding: 100px 0 60px;
+        }
+
         .brand {
             font-size: 0.9rem;
             letter-spacing: 5px;
@@ -50,10 +54,31 @@
             display: block;
         }
 
-        h1 { font-size: clamp(2.5rem, 8vw, 4rem); margin: 0; font-weight: 900; line-height: 1.1; }
-        h1 span { -webkit-text-stroke: 1px white; color: transparent; }
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin: 0;
+            font-weight: 900;
+            line-height: 1.1;
+        }
 
-        .hero-desc { color: var(--text-silver); font-size: 1.2rem; max-width: 650px; margin: 20px auto 40px; }
+        h1 span {
+            -webkit-text-stroke: 1px white;
+            color: transparent;
+        }
+
+        .hero-desc {
+            color: var(--text-silver);
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin: 20px auto 40px;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
 
         .btn-main {
             background: var(--neon-orange);
@@ -65,40 +90,82 @@
             clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
             transition: 0.3s;
             display: inline-block;
+            border: none;
+            cursor: pointer;
         }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 80px; }
+        .btn-main:hover {
+            transform: skew(-2deg) scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 80px;
+        }
 
         .card {
             background: var(--surface-gray);
             border: 1px solid var(--border-color);
             padding: 40px;
+            position: relative;
+            transition: 0.4s;
         }
 
-        .card i { font-size: 2.5rem; margin-bottom: 20px; color: var(--neon-orange); }
-
-        /* --- Privacy Section (Hidden by Default) --- */
-        #privacy-section {
-            display: none;
-            padding: 60px 0;
+        .card:hover {
+            border-color: var(--neon-orange);
+            transform: translateY(-10px);
         }
 
-        .policy-box {
+        .card i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--neon-orange);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: var(--text-silver);
+            line-height: 1.7;
+        }
+
+        /* --- Privacy View Styling --- */
+        #privacy-view {
+            display: none; /* Hidden by default */
+            padding-top: 60px;
+        }
+
+        .policy-card {
             background: var(--surface-gray);
             border: 1px solid var(--border-color);
             padding: 40px;
-            margin-top: 20px;
+            margin-bottom: 30px;
         }
 
-        .back-btn {
+        .policy-card h2 {
             color: var(--neon-orange);
-            cursor: pointer;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 20px;
+            text-transform: uppercase;
+            margin-top: 0;
         }
 
+        .back-link {
+            color: var(--neon-orange);
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Footer --- */
         footer {
             margin-top: 100px;
             padding: 60px 0;
@@ -106,26 +173,41 @@
             text-align: center;
         }
 
+        .footer-nav {
+            margin: 20px 0;
+        }
+
         .footer-nav a {
             color: var(--text-silver);
             text-decoration: none;
             margin: 0 15px;
+            font-size: 0.85rem;
+            transition: 0.3s;
             cursor: pointer;
         }
-        
-        .contact-email { color: var(--neon-orange); font-weight: bold; }
+
+        .footer-nav a:hover {
+            color: var(--neon-orange);
+        }
+
+        .contact-email {
+            color: var(--neon-orange);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    
-    <div id="home-view">
+    <div id="main-view">
         <header>
             <span class="brand">Multilife Solutions</span>
             <h1>UNREAL <span>INSIGHTS.</span><br>LIVE ACTION.</h1>
             <p class="hero-desc">The ultimate digital architecture for sports fanatics. We deliver precision data and real-time alerts across every league on the planet.</p>
-            <a href="#" class="btn-main">Get Access Now</a>
+            
+            <div class="cta-group">
+                <a href="#" class="btn-main">Get Access Now</a>
+            </div>
         </header>
 
         <section class="grid">
@@ -147,22 +229,27 @@
         </section>
     </div>
 
-    <div id="privacy-view" style="display: none;">
-        <div class="back-btn" onclick="showHome()">← BACK TO SITE</div>
-        <h1>PRIVACY <span>PROTOCOL.</span></h1>
-        <div class="policy-box">
-            <h2>Data Protection</h2>
-            <p>We collect minimal data to ensure your sports feed is accurate. Your data is encrypted and never sold to third parties.</p>
-            <h3>Contact</h3>
-            <p>For data inquiries: company@multilifesolutionsinvestments.org</p>
+    <div id="privacy-view">
+        <div class="back-link" onclick="toggleView('main')"><i class="fas fa-arrow-left"></i> Back to Intelligence</div>
+        
+        <div class="policy-card">
+            <h2>Privacy Protocol</h2>
+            <p style="color: var(--neon-orange); font-size: 0.8rem; letter-spacing: 2px;">LAST UPDATED: MARCH 2026</p>
+            <p>At Multilife Solutions, we prioritize the security of your tactical data. Our platform is designed with minimal data footprints to ensure user anonymity where possible.</p>
+            
+            <h3>1. Data Acquisition</h3>
+            <p>We collect essential data such as email addresses for account verification and technical logs (IP/Browser) to optimize our real-time delivery engine.</p>
+            
+            <h3>2. Data Security</h3>
+            <p>Your data is encrypted via SSL and stored on secure servers. We do not sell player or fan metrics to third-party advertising or betting networks.</p>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Multilife Solutions.</p>
+        <p>&copy; 2026 Multilife Solutions. Powered by High-Octane Data.</p>
         <p>Support: <span class="contact-email">company@multilifesolutionsinvestments.org</span></p>
         <div class="footer-nav">
-            <a onclick="showPrivacy()">Privacy Policy</a>
+            <a onclick="toggleView('privacy')">Privacy Policy</a>
             <a href="#">Terms of Play</a>
             <a href="#">Cookies</a>
         </div>
@@ -170,16 +257,19 @@
 </div>
 
 <script>
-    function showPrivacy() {
-        document.getElementById('home-view').style.display = 'none';
-        document.getElementById('privacy-view').style.display = 'block';
-        window.scrollTo(0,0);
-    }
-
-    function showHome() {
-        document.getElementById('home-view').style.display = 'block';
-        document.getElementById('privacy-view').style.display = 'none';
-        window.scrollTo(0,0);
+    function toggleView(view) {
+        const main = document.getElementById('main-view');
+        const privacy = document.getElementById('privacy-view');
+        
+        if (view === 'privacy') {
+            main.style.display = 'none';
+            privacy.style.display = 'block';
+            window.scrollTo(0, 0);
+        } else {
+            main.style.display = 'block';
+            privacy.style.display = 'none';
+            window.scrollTo(0, 0);
+        }
     }
 </script>
 
