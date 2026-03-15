@@ -22,6 +22,7 @@
             overflow-x: hidden;
         }
 
+        /* Animated background element */
         body::before {
             content: "";
             position: fixed;
@@ -39,9 +40,11 @@
             padding: 20px;
         }
 
-        /* --- UI Elements --- */
-        header { text-align: center; padding: 100px 0 60px; }
-        
+        header {
+            text-align: center;
+            padding: 100px 0 60px;
+        }
+
         .brand {
             font-size: 0.9rem;
             letter-spacing: 5px;
@@ -51,10 +54,31 @@
             display: block;
         }
 
-        h1 { font-size: clamp(2.5rem, 8vw, 4rem); margin: 0; font-weight: 900; line-height: 1.1; }
-        h1 span { -webkit-text-stroke: 1px white; color: transparent; }
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin: 0;
+            font-weight: 900;
+            line-height: 1.1;
+        }
 
-        .hero-desc { color: var(--text-silver); font-size: 1.2rem; max-width: 650px; margin: 20px auto 40px; }
+        h1 span {
+            -webkit-text-stroke: 1px white;
+            color: transparent;
+        }
+
+        .hero-desc {
+            color: var(--text-silver);
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin: 20px auto 40px;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
 
         .btn-main {
             background: var(--neon-orange);
@@ -65,98 +89,103 @@
             text-transform: uppercase;
             clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
             transition: 0.3s;
-            display: inline-block;
-            border: none;
             cursor: pointer;
+            border: none;
         }
 
-        .btn-main:hover { transform: skew(-2deg) scale(1.05); filter: brightness(1.2); }
+        .btn-main:hover {
+            transform: skew(-2deg) scale(1.05);
+            filter: brightness(1.2);
+        }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 80px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 80px;
+        }
 
         .card {
             background: var(--surface-gray);
             border: 1px solid var(--border-color);
             padding: 40px;
+            position: relative;
             transition: 0.4s;
         }
 
-        .card:hover { border-color: var(--neon-orange); transform: translateY(-10px); }
-        .card i { font-size: 2.5rem; margin-bottom: 20px; color: var(--neon-orange); }
-        .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
-        .card p { color: var(--text-silver); line-height: 1.7; }
-
-        /* --- Privacy Section (Hidden by Default) --- */
-        #privacy-section {
-            display: none;
-            padding: 80px 0;
-            animation: fadeIn 0.4s ease;
+        .card:hover {
+            border-color: var(--neon-orange);
+            transform: translateY(-10px);
         }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .card i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--neon-orange);
+        }
 
-        .policy-content {
-            background: var(--surface-gray);
-            border: 1px solid var(--border-color);
-            padding: 40px;
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: var(--text-silver);
+            line-height: 1.7;
+        }
+
+        /* --- Privacy Policy Modal --- */
+        #privacy-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 5, 0.98);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 60px 20px;
+            box-sizing: border-box;
+        }
+
+        .policy-container {
             max-width: 800px;
             margin: 0 auto;
         }
 
-        .policy-content h2 { color: var(--neon-orange); text-transform: uppercase; }
-
-        .back-link {
-            color: var(--neon-orange);
-            cursor: pointer;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 20px;
-            text-decoration: underline;
+        .policy-card {
+            background: var(--surface-gray);
+            border: 1px solid var(--border-color);
+            padding: 40px;
         }
 
-        /* --- Footer --- */
-        footer { margin-top: 100px; padding: 60px 0; border-top: 1px solid var(--border-color); text-align: center; }
-        .footer-nav { margin: 20px 0; }
-        .footer-nav a { color: var(--text-silver); text-decoration: none; margin: 0 15px; cursor: pointer; transition: 0.3s; }
-        .footer-nav a:hover { color: var(--neon-orange); }
-        .contact-email { color: var(--neon-orange); font-weight: bold; }
-    </style>
-</head>
-<body>
+        .close-btn {
+            color: var(--neon-orange);
+            text-transform: uppercase;
+            font-weight: 900;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
 
-<div class="container">
-    <div id="main-content">
-        <header>
-            <span class="brand">Multilife Solutions</span>
-            <h1>UNREAL <span>INSIGHTS.</span><br>LIVE ACTION.</h1>
-            <p class="hero-desc">The ultimate digital architecture for sports fanatics. We deliver precision data and real-time alerts across every league on the planet.</p>
-            <div class="cta-group">
-                <a href="#" class="btn-main">Get Access Now</a>
-            </div>
-        </header>
+        /* --- Footer Styling --- */
+        footer {
+            margin-top: 100px;
+            padding: 60px 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
 
-        <section class="grid">
-            <div class="card">
-                <i class="fas fa-microchip"></i>
-                <h3>Predictive Engine</h3>
-                <p>Our algorithms process thousands of data points per second to predict match flow before it happens.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-vr-cardboard"></i>
-                <h3>Live 3D Tracking</h3>
-                <p>Experience the pitch like never before with virtual positional tracking for top-flight European leagues.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-user-secret"></i>
-                <h3>Scout Mode</h3>
-                <p>Access heatmaps and player-specific metrics usually reserved for professional backroom staff.</p>
-            </div>
-        </section>
-    </div>
+        .footer-nav {
+            margin: 20px 0;
+        }
 
-    <div id="privacy-section">
-        <span class="back-link" onclick="toggleView('main')">← BACK TO HQ</span>
-        <div class="policy-content">
-            <h2>Privacy Protocol</h2>
-            <p><strong>Last Updated:</strong> March 2026</p>
-            <p>Multilife Solutions operates
+        .footer-nav a {
+            color: var(--text-silver);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.85rem;
+            transition: 0.3s;
+            cursor: pointer;
